@@ -22,6 +22,8 @@ def change(x, y):
     """Change snake direction."""
     aim.x = x
     aim.y = y
+    food.x = randrange(-15, 15) * 10
+    food.y = randrange(-15, 15) * 10
 
 
 def inside(head):
@@ -48,15 +50,23 @@ def move():
     else:
         snake.pop(0)
 
-    clear()
+    clear()    
+
+    """ 
+    Se asegura de que el cambio de colores suceda tal que el color de la serpiente sea distinto al de la comida
+    colors = ["black", "green", "yellow", "blue", "orange"]
+    snake_color = colors[randrange(0,5)]
+    food_color = colors[randrange(0,5)]
+    while (snake_color == food_color):
+        food_color = colors[randrange(0,5)]
+    """
 
     for body in snake:
-        square(body.x, body.y, 9, 'black')
+        square(body.x, body.y, 9, snake_color)
 
-    square(food.x, food.y, 9, 'green')
+    square(food.x, food.y, 9, food_color)
     update()
     ontimer(move, 100)
-
 
 setup(420, 420, 370, 0)
 hideturtle()
